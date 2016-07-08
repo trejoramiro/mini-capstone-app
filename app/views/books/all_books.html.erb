@@ -1,0 +1,15 @@
+<h1>Books</h1>
+<% @books.each do |book| %>
+<% link = "/book/" + book.id.to_s%>
+<%= puts link %>
+<h2><a href= <%link%> > <%= book.title %> </a></h2>
+<img src=<%= book.image%>>
+<h3> Author </h3>
+<p><%= book.author %></p>
+<h3> Price </h3>
+<p>$<%= book.price %></p>
+<h3> Publisher </h3>
+<p><%= book.publisher %></p>
+<h3> Date Published</h3>
+<p><%= book.date_published %></p>
+<% end %>
