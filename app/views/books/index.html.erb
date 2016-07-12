@@ -1,9 +1,10 @@
 <h1>Books</h1>
+<button type="button" class="btn btn-primary-outline">
+<a href="/books/new">Create Book</a>
+</button>
 <% @books.each do |book| %>
-<% link = "/book/" + book.id.to_s%>
-<%= puts link %>
-<h2><a href= <%= link%> > <%= book.title %> </a></h2>
-<img src=<%= book.image%> >
+<h2> <a href="/books/<%= book.id %>"> <%= book.title %> </a></h2>
+<img src=<%= book.image %> >
 <h3> Author </h3>
 <p><%= book.author %></p>
 <h3> Price </h3>
@@ -12,4 +13,7 @@
 <p><%= book.publisher %></p>
 <h3> Date Published</h3>
 <p><%= book.date_published %></p>
+<h3>Genre</h3>
+<p><%= book.genre %></p>
+
 <% end %>
