@@ -28,7 +28,8 @@ class BooksController < ApplicationController
 
     @new_book.save
 
-    render 'create.html.erb'
+    flash[:success] = "Book <strong>successfully</strong> created."
+    redirect_to "/books/#{@new_book.id}"
   end
 
   def edit
@@ -48,14 +49,16 @@ class BooksController < ApplicationController
       genre: params[:form_genre],
       date_published: params[:form_date_published]
       )
+    flash[:success] = "Book <strong>successfully</strong> updated."
+    redirect_to "/books/#{@book.id}"
 
-    render 'update.html.erb'
   end
 
   def destroy
     @book = Book.find_by(id: params[:id])
     @book.destroy
-    render 'destroy.html.erb'
+    flash[:danger] =  "Successfully <strong>deleted</strong> Book."
+    redirect_to '/books'
   end
 
 end
