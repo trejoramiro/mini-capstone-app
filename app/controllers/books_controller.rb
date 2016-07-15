@@ -23,7 +23,8 @@ class BooksController < ApplicationController
       publisher: params[:form_publisher],
       image: params[:form_image],
       date_published: params[:form_date_published],
-      genre: params[:form_genre]
+      genre: params[:form_genre],
+      description: params[:form_description]
       })
 
     @new_book.save
@@ -47,7 +48,8 @@ class BooksController < ApplicationController
       publisher: params[:form_publisher],
       image: params[:form_image],
       genre: params[:form_genre],
-      date_published: params[:form_date_published]
+      date_published: params[:form_date_published],
+      description: params[:form_description]
       )
     flash[:success] = "Book <strong>successfully</strong> updated."
     redirect_to "/books/#{@book.id}"

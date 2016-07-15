@@ -9,8 +9,8 @@
   <a href="/books/<%= book.id %>"><img class="img-fluid" src="<%= book.image %>" width="200" height="300" data-toggle="tooltip" data-placement="right" title="Tooltip on right"></a>
     <h5> <%= book.title %></h5>
   <h4><small class="text-muted">By <%= book.author %></small></h4>
-  <% if book.sales_message %>
-  <span class="label label-warning">On Sale!</span>
+  <% if book.discounted? %>
+    <span class="label label-warning">On Sale!</span>
   <% end %>
 </div>
 <% end %>

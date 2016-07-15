@@ -28,6 +28,10 @@
   <%= label_tag :form_genre, 'Genre' %>
   <%= text_field_tag :form_genre, @book.genre %>
 </div>
+<div class="form-group">
+  <%= label_tag :form_description, 'Summary' %>
+  <%= text_field_tag :form_description, @book.description %>
+</div>
 <div>
   <%= submit_tag 'Update' %>
 </div>
