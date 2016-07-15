@@ -1,35 +1,49 @@
 <div class="row">
-<div class="col-md-8">
-<h1><%= @book.title %></h1>
+    <div class="col-md-8">
+        <h1><%= @book.title %></h1>
+    </div>
 </div>
-</div>
-
 <div class="row">
-<div class="col-md-4">
-<img src=<%= @book.image%> width="300" height="500">
+    <div class="col-md-4">
+        <img src=<%=@ book.image%> width="300" height="500">
+    </div>
+    <div class="col-md-8">
+        <h4> Author </h4>
+        <p>
+            <%= @book.author %>
+        </p>
+        <h4> Price </h4>
+        <p>$
+            <%= @book.price %>
+        </p>
+        <h4>Sales Tax</h4>
+        <p>$
+            <%= '%.2f' % (@book.tax * @book.price.to_f) %>
+        </p>
+        <h4> Total </h4>
+        <p>$
+            <%= '%.2f' %  @book.total %>
+        </p>
+        <h4> Publisher </h4>
+        <p>
+            <%= @book.publisher %>
+        </p>
+        <h4> Date Published</h4>
+        <p>
+            <%= @book.date_published %>
+        </p>
+        <h4> Genre </h4>
+        <p>
+            <%= @book.genre %>
+        </p>
+        <h4> Summary </h4>
+        <p>
+            <%= @book.description %>
+                <p>
+                    <button type="button" class="btn btn-primary-outline">
+                        <a href="/books/<%= @book.id %>/edit">Update</a>
+                    </button>
+                    <%= link_to "Delete this book.", "/books/#{@book.id}", :class => 'btn btn-danger', method: :delete %>
+    </div>
 </div>
-
-<div class="col-md-8">
-<h4> Author </h4>
-<p><%= @book.author %></p>
-<h4> Price </h4>
-<p>$<%= @book.price %></p>
-<h4>Sales Tax</h4>
-<p>$<%= '%.2f' % (@book.tax * @book.price.to_f) %></p>
-<h4> Total </h4>
-<p>$<%= '%.2f' %  @book.total %></p>
-<h4> Publisher </h4>
-<p><%= @book.publisher %></p>
-<h4> Date Published</h4>
-<p><%= @book.date_published %></p>
-<h4> Genre </h4>
-<p><%= @book.genre %></p>
-<h4> Summary </h4>
-<p><%= @book.description %><p>
-<button type="button" class="btn btn-primary-outline">
-<a href="/books/<%= @book.id %>/edit">Update</a>
-</button>
-<%= link_to "Delete this book.", "/books/#{@book.id}", :class => 'btn btn-danger', method: :delete %>
-</div>
-
-</div> <!-- class: row -->
+<!-- class: row -->

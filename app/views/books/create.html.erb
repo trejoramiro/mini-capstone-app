@@ -1,14 +1,24 @@
 <h1>New Book Created</h1>
 <h2> <%= @new_book.title %></h2>
-<img src=<%= @new_book.image %> >
+<img src=<%=@ new_book.image %> >
 <h3> Author </h3>
-<p><%= @new_book.author %></p>
+<p>
+    <%= @new_book.author %>
+</p>
 <h3> Price </h3>
-<p>$<%= @new_book.price %></p>
+<p>$
+    <%= @new_book.price %>
+</p>
 <h3> Publisher </h3>
-<p><%= @new_book.publisher %></p>
+<p>
+    <%= @new_book.publisher %>
+</p>
 <h3> Date Published <i>(Year-Month-Date)</i> </h3>
-<p><%= @new_book.date_published %></p>
+<p>
+    <%= @new_book.date_published %>
+</p>
 <h3> Genre </h3>
-<p><%= @new_book.genre %></p>
+<p>
+    <%= @new_book.genre %>
+</p>
 <h3><a href="/books">Back to all books</a></h3>
