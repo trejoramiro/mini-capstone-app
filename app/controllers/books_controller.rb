@@ -1,8 +1,26 @@
 class BooksController < ApplicationController
 
   def index
-    @books = Book.all
-    render 'index.html.erb'
+    if params[:random]
+      # @book = Book.find_by_sql("SELECT * FROM books
+      # ORDER BY random()
+      # LIMIT 1;")
+      @book = Book.limit(1).order("RANDOM()")
+      redirect_to "/books/#{@book.ids[0]}"
+    elsif params[:q]
+      @books = Book.find_by(title: params[:q])
+      @books = [@books]
+      render 'index.html.erb'
+    elsif params[:show]
+      @books = Book.where("price < ?", 10.00)
+       render 'index.html.erb'
+    elsif params[:descend]
+      @books = Book.order("#{params[:sort]}" => :desc)
+       render 'index.html.erb'
+    else
+      @books = Book.order(params[:sort])
+       render 'index.html.erb'
+    end
   end
 
   def show

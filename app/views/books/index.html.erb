@@ -1,16 +1,47 @@
 <div class="row">
     <h1 class="display-4">Bookstore</h1>
     <a class="btn btn-primary" href="/books/new">Create Book</a>
+    <div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Sort <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a href="/books?sort=price&descend=true">Highest to Lowest Price</a></li>
+            <li><a href="/books?sort=price">Lowest to Highest Price</a></li>
+        </ul>
+    </div>
 </div>
 <div class="row">
     <% @books.each do |book| %>
         <div class="col-sm-4 tile">
             <a href="/books/<%= book.id %>"><img class="img-fluid" src="<%= book.image %>" width="200" height="300" data-toggle="tooltip" data-placement="right" title="Tooltip on right"></a>
             <h5> <%= book.title %></h5>
-            <h4><small class="text-muted">By <%= book.author %></small></h4>
+            <h4><small class="text-muted">by <%= book.author %></small></h4>
+            <h4><small class="text-muted">$<%= book.price %></small></h4>
             <% if book.discounted? %>
                 <span class="label label-warning">On Sale!</span>
                 <% end %>
         </div>
         <% end %>
+</div>
+<div class="row">
+<nav>
+  <ul class="pagination">
+    <li>
+      <a href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li><a href="#">1</a></li>
+    <li><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">4</a></li>
+    <li><a href="#">5</a></li>
+    <li>
+      <a href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
 </div>
