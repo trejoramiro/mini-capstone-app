@@ -1,0 +1,10 @@
+<h1>New Image </h1>
+<%= form_tag "/books/#{@book.id}/images" , method: :post do %>
+    <div class="form-group">
+        <%= label_tag :form_url, 'URL:' %>
+            <%= text_field_tag :form_url %>
+    </div>
+    <div>
+        <%= submit_tag 'Upload' %>
+    </div>
+<% end %>

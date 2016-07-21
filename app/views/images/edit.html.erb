@@ -1,0 +1,15 @@
+<h1>Edit Images </h1>
+<div class="row">
+<%= form_tag "/books/#{@book.id}/images", method: :patch do %>
+    <% @images.each do |image| %>
+    <%= fields_for "images[]", image do |img| %>
+    <img src=<%= image.url %> >
+    <%= img.text_field :url %>
+    <%= link_to "Delete this image.", "/books/#{@book.id}/images/#{image.id}", :class => 'btn btn-danger', method: :delete %>
+    <% end %>
+<% end %>
+    <div>
+        <%= submit_tag 'Update All' %>
+    </div>
+    <% end %>
+</div>

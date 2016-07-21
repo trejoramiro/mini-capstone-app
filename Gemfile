@@ -28,7 +28,9 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'faker', '~> 1.6.4'
 
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
+
+gem 'money-rails'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

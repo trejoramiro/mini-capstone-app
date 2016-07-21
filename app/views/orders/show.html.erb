@@ -1,0 +1,20 @@
+<h1> Order Confirmation </h1>
+<h3>Order Id</h3>
+<p> <%= @order.id %></p>
+<h3>Quantity</h3>
+<p><%= @order.quantity %></p>
+<h3>Tax</h3>
+<p>$<%= @order.tax %></p>
+<h3>Subtotal</h3>
+<p>$<%= @order.subtotal %></p>
+<h3>Total</h3>
+<p>$<%= @order.total %></p>
+<h3> Email: </h3>
+<p><%= current_user.email %></p>
+<h3> Product Name </h3>
+<p><%= @book.title %></p>
+<h3> Product Image </h3>
+<img src="<%= @book.images.first.url %>">
+<h3> Order Date </h3>
+<p><%= @order.created_at %></p>
+

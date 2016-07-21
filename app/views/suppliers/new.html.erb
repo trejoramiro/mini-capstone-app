@@ -1,0 +1,18 @@
+<h1>Enter a Supplier </h1>
+<%= form_tag '/suppliers' , method: :post do %>
+    <div class="form-group">
+        <%= label_tag :form_name, 'Name:' %>
+            <%= text_field_tag :form_name %>
+    </div>
+    <div class="form-group">
+        <%= label_tag :form_email, 'Email:' %>
+            <%= text_field_tag :form_email %>
+    </div>
+    <div class="form-group">
+        <%= label_tag :form_phone_, 'Phone Number' %>
+            <%= text_field_tag :form_phone %>
+    </div>
+    <div>
+        <%= submit_tag 'Create' %>
+    </div>
+    <% end %>

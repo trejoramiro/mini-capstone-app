@@ -16,10 +16,12 @@
         <%= label_tag :form_publisher, 'Publisher' %>
             <%= text_field_tag :form_publisher, @book.publisher%>
     </div>
+    <% @book.images.each do |image| %>
     <div class="form-group">
         <%= label_tag :form_image, 'Image' %>
-            <%= text_field_tag :form_image, @book.image%>
+            <%= text_field_tag :form_image, image.url %>
     </div>
+    <% end %>
     <div class="form-group">
         <%= label_tag :form_date_published, 'Publishing Date' %>
             <%= text_field_tag :form_date_published, @book.date_published %>

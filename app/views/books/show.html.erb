@@ -5,7 +5,18 @@
 </div>
 <div class="row">
     <div class="col-md-4">
-            <img src=<%= @book.image %> width="300" height="500">
+            <img id= "big-image" src=<%= @book.images.first.url %> width="300" height="500">
+            <!-- button for edting image !-->
+            <div class="row">
+                <% @book.images.each_with_index do |image, index| %>
+                <div class="col-xs-6 col-md-3">
+                    <!-- removed the "href" because it was hiting the link and refreshing !-->
+                    <a class="thumbnail image-thumbnail">
+                    <img class="small-image" onclick="myFunction(<%= index %>)" src=<%= image.url %> alt="...">
+                    </a>
+                </div>
+                <% end %>
+            </div>
     </div>
     <div class="col-md-8">
         <h4> Author </h4>
@@ -24,9 +35,9 @@
         <p>$
             <%= '%.2f' %  @book.total %>
         </p>
-        <h4> Publisher </h4>
+        <h4> Supplier </h4>
         <p>
-            <%= @book.publisher %>
+            <%= @book.supplier.name %>
         </p>
         <h4> Date Published</h4>
         <p>
@@ -41,9 +52,48 @@
             <%= @book.description %>
                 <p>
                     <button type="button" class="btn btn-primary-outline">
-                        <a href="/books/<%= @book.id %>/edit">Update</a>
+                        <a href="/books/<%= @book.id %>/edit">Update Book</a>
                     </button>
                     <%= link_to "Delete this book.", "/books/#{@book.id}", :class => 'btn btn-danger', method: :delete %>
+    </div>          <button type="button" class="btn btn-primary-outline">
+                        <a href="/books/<%= @book.id %>/images/edit">Update Images</a>
+                    </button>
+                     <button type="button" class="btn btn-primary-outline">
+                        <a href="/books/<%= @book.id %>/images/new">Add New Image</a>
+                    </button>
+    <%= form_tag '/orders' , method: :post do %>
+    <div class="form-group">
+        <%= label_tag :form_quantity, 'Quantity:' %>
+            <%= text_field_tag :form_quantity %>
+        <!-- <%= label_tag :form_product_id %> !-->
+            <!-- <%= text_field_tag :form_product_id, @book.id %> !-->
+            <%= hidden_field_tag name="product_id", value="#{@book.id}" %>
     </div>
-</div>
+
+    <div>
+        <%= submit_tag 'Buy Now' %>
+    </div>
+    <% end %>
+        </div>
+
 <!-- class: row -->
+
+<script>
+// $(".image-thumbnail").on("click", function ( event ){
+//     var bigImage = document.getElementById("big-image");
+//     //var bigImageUrl = bigImage.getAttribute("src");
+//     window.bigImage = bigImage;
+//     bigImage.src = "https://upload.wikimedia.org/wikipedia/en/b/bf/Harry_Potter_and_the_Sorcerer's_Stone.jpg";
+//     // bigImage.setAttribute("src", "https://upload.wikimedia.org/wikipedia/en/b/bf/Harry_Potter_and_the_Sorcerer's_Stone.jpg");
+//     //alert(this);
+// });
+
+
+var myFunction = function(index){
+    var small_image = document.getElementsByClassName("small-image")[index].src;
+    var big_image = document.getElementById("big-image");
+    big_image.src = small_image
+    console.log(small_image);
+}
+
+</script>

@@ -16,6 +16,61 @@ Rails.application.routes.draw do
 
   delete 'books/:id' => 'books#destroy'
 
+  #####################################
+
+"/books/8/images/12"
+
+  get 'books/:book_id/images/new' => 'images#new'
+
+  post 'books/:book_id/images' => 'images#create'
+
+  get 'books/:book_id/images/edit' => 'images#edit'
+
+  patch 'books/:book_id/images' => 'images#update'
+
+  delete 'books/:book_id/images/:id' => 'images#destroy'
+
+
+  ##########################################
+
+  get 'suppliers' => 'suppliers#index'
+
+  get 'suppliers/new' => 'suppliers#new'
+
+  post 'suppliers' => 'suppliers#create'
+
+  get 'suppliers/:id' => 'suppliers#show'
+
+  get 'suppliers/:id/edit' => 'suppliers#edit'
+
+  patch 'suppliers/:id' =>'suppliers#update'
+
+  delete 'suppliers/:id' => 'suppliers#destroy'
+
+  ############################################
+
+  get '/signup' => 'users#new'
+
+  post '/users' => 'users#create'
+
+
+  ###########################################
+
+  #this route takes you to just the form
+  get '/login' => 'sessions#new'
+
+  post '/login' => 'sessions#create'
+
+  get '/logout' => 'sessions#destroy'
+
+  ##########################################
+  #get 'orders/new' => 'suppliers#new'
+
+  post "orders" => 'orders#create'
+
+  get 'orders/:id' => 'orders#show'
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

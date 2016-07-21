@@ -1,5 +1,9 @@
 class Book < ActiveRecord::Base
   #great place to add logic  about your model
+  belongs_to :supplier
+  has_many :images
+  has_many :orders
+
   def discounted?
     sale_price = 10.00
     #price_array = price.split('.')
@@ -30,6 +34,7 @@ class Book < ActiveRecord::Base
       return false
     end
   end
+
 
 
 end

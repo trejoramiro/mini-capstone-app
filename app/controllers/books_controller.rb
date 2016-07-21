@@ -1,31 +1,36 @@
 class BooksController < ApplicationController
 
   def index
-    if params[:random]
-      # @book = Book.find_by_sql("SELECT * FROM books
-      # ORDER BY random()
-      # LIMIT 1;")
-      @book = Book.limit(1).order("RANDOM()")
-      redirect_to "/books/#{@book.ids[0]}"
-    elsif params[:q]
+    # if params[:random]
+    #   # @book = Book.find_by_sql("SELECT * FROM books
+    #   # ORDER BY random()
+    #   # LIMIT 1;")
+    #   @book = Book.limit(1).order("RANDOM()")
+    # redirect_to "/books/#{@book.ids[0]}"
+    if params[:q]
       @books = Book.find_by(title: params[:q])
       @books = [@books]
-      render 'index.html.erb'
     elsif params[:show]
       @books = Book.where("price < ?", 10.00)
-       render 'index.html.erb'
     elsif params[:descend]
       @books = Book.order("#{params[:sort]}" => :desc)
-       render 'index.html.erb'
+      #render 'index.html.erb'
+    elsif params[:search_terms]
+      @books = Book.where("title ILIKE ?", "%#{params[:search_terms]}%")
     else
       @books = Book.order(params[:sort])
-       render 'index.html.erb'
     end
+    render 'index.html.erb'
   end
 
   def show
     # using the hash "params[]"
-    @book = Book.find_by(id: params[:id])
+    if params[:id] == 'random'
+      @book = Book.all.sample
+    else
+      @book = Book.find_by(id: params[:id])
+    end
+
     render 'show.html.erb'
   end
 
@@ -33,19 +38,24 @@ class BooksController < ApplicationController
     render 'new.html.erb'
   end
 
+
   def create
     @new_book = Book.new({
       title: params[:form_book_title],
       author: params[:form_author],
       price: params[:form_price],
       publisher: params[:form_publisher],
-      image: params[:form_image],
       date_published: params[:form_date_published],
       genre: params[:form_genre],
       description: params[:form_description]
       })
 
     @new_book.save
+
+    @image = Image.new({url: params[:form_image],
+      book_id: @new_book.id})
+
+    @image.save
 
     flash[:success] = "Book <strong>successfully</strong> created."
     redirect_to "/books/#{@new_book.id}"
@@ -64,11 +74,13 @@ class BooksController < ApplicationController
       author: params[:form_author],
       price: params[:form_price],
       publisher: params[:form_publisher],
-      image: params[:form_image],
       genre: params[:form_genre],
       date_published: params[:form_date_published],
       description: params[:form_description]
       )
+
+      #image: params[:form_image],
+
     flash[:success] = "Book <strong>successfully</strong> updated."
     redirect_to "/books/#{@book.id}"
 
