@@ -9,6 +9,9 @@
         <ul class="dropdown-menu">
             <li><a href="/books?sort=price&descend=true">Highest to Lowest Price</a></li>
             <li><a href="/books?sort=price">Lowest to Highest Price</a></li>
+            <% @categories.each do |category| %>
+            <li><a href="/books?category=<%= category.name%>"><%= category.name %></a></li>
+            <% end %>
         </ul>
     </div>
 
@@ -20,7 +23,7 @@
             <a href="/books/<%= book.id %>"><img class="img-fluid" src="<%= book.images.first.url %>" width="200" height="300" data-toggle="tooltip" data-placement="right" title="Tooltip on right"></a>
             <h5> <%= book.title %></h5>
             <h4><small class="text-muted">by <%= book.author %></small></h4>
-            <h4><small class="text-muted">$<%= book.price %></small></h4>
+            <h4><small class="text-muted"><%= number_to_currency(book.price) %></small></h4>
             <% if book.discounted? %>
                 <span class="label label-warning">On Sale!</span>
                 <% end %>

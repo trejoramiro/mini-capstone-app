@@ -1,20 +1,27 @@
-<h1> Order Confirmation </h1>
+<!-- <h1> Order Confirmation </h1>
 <h3>Order Id</h3>
 <p> <%= @order.id %></p>
 <h3>Quantity</h3>
 <p><%= @order.quantity %></p>
 <h3>Tax</h3>
-<p>$<%= @order.tax %></p>
+<p><%= number_to_currency(@order.tax) %></p>
 <h3>Subtotal</h3>
-<p>$<%= @order.subtotal %></p>
+<p><%= number_to_currency(@order.subtotal) %></p>
 <h3>Total</h3>
-<p>$<%= @order.total %></p>
+<p><%= number_to_currency(@order.total) %></p>
 <h3> Email: </h3>
-<p><%= current_user.email %></p>
-<h3> Product Name </h3>
-<p><%= @book.title %></p>
-<h3> Product Image </h3>
-<img src="<%= @book.images.first.url %>">
-<h3> Order Date </h3>
-<p><%= @order.created_at %></p>
+<p><%= current_user.email %></p> !-->
+<h1> Order Confirmation </h1>
+<h3>ID: <%= @order.id %></h3>
+<h3>Subtotal: <%= number_to_currency(@order.subtotal) %></h3>
+<h3>Tax: <%= number_to_currency(@order.tax) %></h3>
+<h3>Order Total: <%= number_to_currency(@order.total) %></h3>
+<h3>Quantity: <%=  @order.quantity %></h3>
+<hr>
+<h2>Products</h2>
 
+<% @order.carted_products.each do |cp| %>
+  <p><%= cp.book.title %></p>
+  <p>Price: <%= number_to_currency(cp.book.price) %></p>
+  <p>Quantity: <%= cp.quantity %> </p>
+<% end %>

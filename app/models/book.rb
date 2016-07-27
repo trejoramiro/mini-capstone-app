@@ -2,7 +2,17 @@ class Book < ActiveRecord::Base
   #great place to add logic  about your model
   belongs_to :supplier
   has_many :images
-  has_many :orders
+  has_many :orders, foreign_key: 'product_id'
+  has_many :categorized_books
+  # books table does not hold category_id so through is used
+  has_many :categories, through: :categorized_books
+  has_many :carted_products
+
+
+
+
+
+  monetize :price, :as => "price_money"
 
   def discounted?
     sale_price = 10.00
@@ -35,6 +45,9 @@ class Book < ActiveRecord::Base
     end
   end
 
+  def format_categories
+    categories.pluck(:name).join(", ")
+  end
 
 
 end

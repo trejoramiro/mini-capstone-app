@@ -3,6 +3,7 @@
         <h1><%= @book.title %></h1>
     </div>
 </div>
+
 <div class="row">
     <div class="col-md-4">
             <img id= "big-image" src=<%= @book.images.first.url %> width="300" height="500">
@@ -18,22 +19,25 @@
                 <% end %>
             </div>
     </div>
+
     <div class="col-md-8">
         <h4> Author </h4>
         <p>
             <%= @book.author %>
         </p>
         <h4> Price </h4>
-        <p>$
-            <%= @book.price %>
+        <p>
+            <%= number_to_currency(@book.price) %>
         </p>
         <h4>Sales Tax</h4>
-        <p>$
-            <%= '%.2f' % (@book.tax * @book.price.to_f) %>
+        <p>
+            <!-- <%= '%.2f' % (@book.tax * @book.price.to_f) %> !-->
+            <%= number_to_currency(@book.tax * @book.price.to_f) %>
         </p>
         <h4> Total </h4>
-        <p>$
-            <%= '%.2f' %  @book.total %>
+        <p>
+            <!-- <%= '%.2f' %  @book.total %> !-->
+            <%= number_to_currency(@book.total) %>
         </p>
         <h4> Supplier </h4>
         <p>
@@ -43,6 +47,10 @@
         <p>
             <%= @book.date_published %>
         </p>
+         <h4> Category</h4>
+        <p>
+            <%= @book.format_categories%>
+        </p>
         <h4> Genre </h4>
         <p>
             <%= @book.genre %>
@@ -50,30 +58,30 @@
         <h4> Summary </h4>
         <p>
             <%= @book.description %>
-                <p>
+                </p>
                     <button type="button" class="btn btn-primary-outline">
                         <a href="/books/<%= @book.id %>/edit">Update Book</a>
                     </button>
                     <%= link_to "Delete this book.", "/books/#{@book.id}", :class => 'btn btn-danger', method: :delete %>
-    </div>          <button type="button" class="btn btn-primary-outline">
+              <button type="button" class="btn btn-primary-outline">
                         <a href="/books/<%= @book.id %>/images/edit">Update Images</a>
                     </button>
                      <button type="button" class="btn btn-primary-outline">
                         <a href="/books/<%= @book.id %>/images/new">Add New Image</a>
                     </button>
-    <%= form_tag '/orders' , method: :post do %>
-    <div class="form-group">
-        <%= label_tag :form_quantity, 'Quantity:' %>
-            <%= text_field_tag :form_quantity %>
-        <!-- <%= label_tag :form_product_id %> !-->
-            <!-- <%= text_field_tag :form_product_id, @book.id %> !-->
-            <%= hidden_field_tag name="product_id", value="#{@book.id}" %>
     </div>
 
-    <div>
-        <%= submit_tag 'Buy Now' %>
+    <% if current_user %>
+    <%= form_tag "/cart/#{@book.id}", method: :post do %>
+    <div class="form-group">
+            <%= label_tag :form_quantity, "Quantity:" %>
+            <%= text_field_tag :form_quantity %>
+            <%= hidden_field_tag name="product_id", value="#{@book.id}" %>
     </div>
+            <%= submit_tag "Add to Cart" %>
     <% end %>
+    <% end %>
+
         </div>
 
 <!-- class: row -->

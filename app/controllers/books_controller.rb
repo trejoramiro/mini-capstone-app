@@ -10,16 +10,19 @@ class BooksController < ApplicationController
     if params[:q]
       @books = Book.find_by(title: params[:q])
       @books = [@books]
+    elsif params[:category]
+      @books = Category.find_by(name: params[:category]).books
     elsif params[:show]
       @books = Book.where("price < ?", 10.00)
     elsif params[:descend]
-      @books = Book.order("#{params[:sort]}" => :desc)
+      @books = Book.order("price" => :desc)
       #render 'index.html.erb'
     elsif params[:search_terms]
       @books = Book.where("title ILIKE ?", "%#{params[:search_terms]}%")
     else
       @books = Book.order(params[:sort])
     end
+    @categories = Category.all
     render 'index.html.erb'
   end
 

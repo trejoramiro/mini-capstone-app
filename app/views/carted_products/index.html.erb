@@ -1,0 +1,13 @@
+<h1> Your Shopping Cart</h1>
+
+<% @shopping_cart.each do |product| %>
+  <h1><%= product.book.title %></h1>
+  <h4>Price: <%= product.book.price %></h4>
+  <p>Quantity: <%= product.quantity %></p>
+  <%= link_to "Remove from Cart", "/cart/#{product.id}", :class => 'btn btn-danger', method: :delete %>
+  <hr>
+<% end %>
+
+<%= form_tag "/orders", method: :post do %>
+<%= submit_tag "Buy Now" %>
+<% end %>

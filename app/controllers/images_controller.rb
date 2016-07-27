@@ -45,6 +45,6 @@ class ImagesController < ApplicationController
     image.destroy
 
     flash[:danger] = "Successfully <strong>deleted</strong> Image."
-    redirect_to "/images/#{params[:book_id]}/edit"
+    redirect_to :back
   end
 end

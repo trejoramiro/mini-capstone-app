@@ -32,6 +32,8 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'money-rails'
 
+gem 'json'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
