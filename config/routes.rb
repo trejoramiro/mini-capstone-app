@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
   #####################################
 
-"/books/8/images/12"
+#"/books/8/images/12"
 
   get 'books/:book_id/images/new' => 'images#new'
 

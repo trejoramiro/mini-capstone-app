@@ -59,6 +59,7 @@
         <p>
             <%= @book.description %>
                 </p>
+                    <% if current_user && current_user.admin %>
                     <button type="button" class="btn btn-primary-outline">
                         <a href="/books/<%= @book.id %>/edit">Update Book</a>
                     </button>
@@ -69,6 +70,7 @@
                      <button type="button" class="btn btn-primary-outline">
                         <a href="/books/<%= @book.id %>/images/new">Add New Image</a>
                     </button>
+                    <% end %>
     </div>
 
     <% if current_user %>

@@ -1,5 +1,5 @@
 class CartedProductsController < ApplicationController
-
+  before_action :authenticate_admin!
   def index
     # association established in the user model to make this work
     # association established in the carted_products to make this work

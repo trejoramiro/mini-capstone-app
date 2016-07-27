@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+  before_action :authenticate_admin!, except: [:index, :show]
 
   def index
     # if params[:random]

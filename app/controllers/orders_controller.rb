@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-
+  before_action :authenticate_user!
   def create
     #@book = Book.find_by(id: params[:form_product_id])
     user_items = CartedProduct.where(user_id: current_user.id)
@@ -42,7 +42,7 @@ class OrdersController < ApplicationController
       #   product.assign_attributes({status: "purchased", order_id: @order.id})
       #   product.save
       # end
-      @shopping_cart.update_all(status: "purchased", order_id: @order.id)
+      @shopping_cart.update_all(status: "purchased", order_id: @order.order_id)
     end
 
     redirect_to "/orders/#{@order.id}"

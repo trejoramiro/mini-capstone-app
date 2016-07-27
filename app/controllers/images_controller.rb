@@ -2,6 +2,7 @@ class ImagesController < ApplicationController
   #  def index
   #   render 'index.html.erb'
   # end
+  before_action :authenticate_admin!
 
   def show
   end
