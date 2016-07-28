@@ -8,6 +8,16 @@ class Book < ActiveRecord::Base
   has_many :categories, through: :categorized_books
   has_many :carted_products
 
+  ##Validations
+  ##################################
+
+  validates :title, presence: true, length: { minimum: 1 }
+  validates :price, presence: true, numericality: true
+  validates :author, presence: true, uniqueness: true, length: { minimum: 2 }
+  validates :genre, presence: true
+  validates :publisher, presence: true, uniqueness: true
+  validates :date_published, presence: true, length: { minimum: 7 }
+  validates :description, length: { maximum: 500 }
 
 
 

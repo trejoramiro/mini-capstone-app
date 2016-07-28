@@ -39,11 +39,13 @@ class BooksController < ApplicationController
   end
 
   def new
+    @new_book = Book.new()
     render 'new.html.erb'
   end
 
 
   def create
+    # instance of the Book class
     @new_book = Book.new({
       title: params[:form_book_title],
       author: params[:form_author],
@@ -54,15 +56,19 @@ class BooksController < ApplicationController
       description: params[:form_description]
       })
 
-    @new_book.save
-
     @image = Image.new({url: params[:form_image],
       book_id: @new_book.id})
 
     @image.save
 
-    flash[:success] = "Book <strong>successfully</strong> created."
-    redirect_to "/books/#{@new_book.id}"
+    if @new_book.save
+    #@image.save
+
+      flash[:success] = "Book <strong>successfully</strong> created."
+      redirect_to "/books/#{@new_book.id}"
+    else
+      render 'new.html.erb'
+    end
   end
 
   def edit
@@ -73,7 +79,8 @@ class BooksController < ApplicationController
   def update
     @book = Book.find_by(id: params[:id])
     #updates and saves at the same time
-    @book.update(
+
+    @book.assign_attributes(
       title: params[:form_book_title],
       author: params[:form_author],
       price: params[:form_price],
@@ -82,12 +89,14 @@ class BooksController < ApplicationController
       date_published: params[:form_date_published],
       description: params[:form_description]
       )
-
       #image: params[:form_image],
 
-    flash[:success] = "Book <strong>successfully</strong> updated."
-    redirect_to "/books/#{@book.id}"
-
+    if @book.save
+      flash[:success] = "Book <strong>successfully</strong> updated."
+      redirect_to "/books/#{@book.id}"
+    else
+      render 'edit.html.erb'
+    end
   end
 
   def destroy
