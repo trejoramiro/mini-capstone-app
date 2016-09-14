@@ -42,7 +42,7 @@ class OrdersController < ApplicationController
       #   product.assign_attributes({status: "purchased", order_id: @order.id})
       #   product.save
       # end
-      @shopping_cart.update_all(status: "purchased", order_id: @order.order_id)
+      @shopping_cart.update_all(status: "purchased", order_id: @order.id)
     end
 
     redirect_to "/orders/#{@order.id}"

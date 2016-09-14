@@ -22,7 +22,7 @@ class Book < ActiveRecord::Base
 
 
 
-  monetize :price, :as => "price_money"
+  #monetize :price, :as => "price_money"
 
   def discounted?
     sale_price = 10.00
